@@ -33,12 +33,7 @@ public class Controller {
         if(author.replaceAll(" ","").equals("") || message.replaceAll(" ","").equals("")) {
             return "filed";
         }
-        Message msg = new Message();
-        msg.setId(messageRepository.findAll().size() + 1);
-        msg.setAuthor(author);
-        msg.setMessage(message);
-        msg.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-        messageRepository.save(msg);
+        messageRepository.save(new Message((long) (messageRepository.findAll().size() + 1),author,message,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
         return "success";
     }
 }
